@@ -6,21 +6,20 @@ const NewExpense = (props) => {
 
     const [isEditing, setIsEditing] = useState(false)
 
+    const startEditingHandler = () => {
+        setIsEditing(true)
+    }
+    const stopEditingHandler = () => {
+        setIsEditing(false)
+    }
+
     const saveExpenseDateHandler = (enteredExpenseData) => {
         const expenseData = {
             ...enteredExpenseData,
             id: Math.random().toString()
         }
-        props.onAddExpense(expenseData)
         console.log(expenseData);
-    }
-
-    const startEditingHandler = () => {
-        setIsEditing(true)
-    }
-
-    const stopEditingHandler = () => {
-        setIsEditing(false)
+        props.onAddExpense(expenseData)
     }
 
     return (
@@ -30,10 +29,7 @@ const NewExpense = (props) => {
             )}
 
             {isEditing && (
-                <NewExpenseForm
-                    onSaveExpenseData={saveExpenseDateHandler}
-                    onCancel={stopEditingHandler}
-                />
+                <NewExpenseForm onSaveExpenseData={saveExpenseDateHandler} onCancel={stopEditingHandler} />
             )}
         </div>
     )
